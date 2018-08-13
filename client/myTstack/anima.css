@@ -1,0 +1,27 @@
+:root {
+  --ease: cubic-bezier(0.42, 0.00, 0.58, 1.00);
+  --easeIn: cubic-bezier(0.42, 0.00, 1.00, 1.00);
+  --easeOut: cubic-bezier(0.00, 0.00, 0.58, 1.00);
+  --quad: cubic-bezier(0.48, 0.04, 0.52, 0.96);
+  --quadIn: cubic-bezier(0.26, 0.00, 0.60, 0.20);
+  --quadOut: cubic-bezier(0.40, 0.80, 0.74, 1.00);
+  --cubic: cubic-bezier(0.66, 0.00, 0.34, 1.00);
+  --cubicIn: cubic-bezier(0.40, 0.00, 0.68, 0.06);
+  --cubicOut: cubic-bezier(0.32, 0.94, 0.60, 1.00);
+  --quart: cubic-bezier(0.76, 0.00, 0.24, 1.00);
+  --quartIn: cubic-bezier(0.52, 0.00, 0.74, 0.00);
+  --quartOut: cubic-bezier(0.26, 1.00, 0.48, 1.00);
+  --quint: cubic-bezier(0.84, 0.00, 0.16, 1.00);
+  --quintIn: cubic-bezier(0.64, 0.00, 0.78, 0.00);
+  --quintOut: cubic-bezier(0.22, 1.00, 0.36, 1.00);
+  --expo: cubic-bezier(0.90, 0.00, 0.10, 1.00);
+  --expoIn: cubic-bezier(0.66, 0.00, 0.86, 0.00);
+  --expoOut: cubic-bezier(0.14, 1.00, 0.34, 1.00);
+  --circ: cubic-bezier(0.88, 0.14, 0.12, 0.86);
+  --circIn: cubic-bezier(0.54, 0.00, 1.00, 0.44);
+  --circOut: cubic-bezier(0.00, 0.56, 0.46, 1.00);
+  --back: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  --backIn: cubic-bezier(0.60, -0.28, 0.73, 0.04);
+  --backOut: cubic-bezier(0.17, 0.89, 0.32, 1.27);
+  --linear: cubic-bezier(0.00, 0.00, 1.00, 1.00);
+}

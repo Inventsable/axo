@@ -1,0 +1,589 @@
+@font-face {
+  font-family: 'Adobe-Font';
+  src:
+    url('fonts/Adobe-Font.ttf?scw132') format('truetype'),
+    url('fonts/Adobe-Font.woff?scw132') format('woff'),
+    url('fonts/Adobe-Font.svg?scw132#Adobe-Font') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="adobe-icon-"], [class*=" adobe-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'Adobe-Font' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+html {
+  font-size: 12px;
+  margin: 0px .45rem 0px .25rem;
+}
+
+:root {
+  --globalBorderWidth: 1.5px;
+  --borderRadius: 3px;
+  --borderWidth: 1.5px;
+
+  --colorPanelBG: #323232;
+  --altOpacity: 0.2;
+
+  --border: 1.5px solid transparent;
+  --btnBorder: 1.5px solid transparent;
+
+  --inputPadding: 0rem .5rem;
+  --inputHeight: 1.5rem;
+  --inputWidthMD: 3rem;
+  --inputWidthLG: 4rem;
+  --inputWidth1X: 100%;
+
+  --btnPadding: .0625rem .5rem;
+  --btnMargin: auto .035rem;
+  --btnHeight: 1.75rem;
+  --btnHeightMax: 25.17px;
+  --btnWidth: 1.25rem;
+
+  --fontSize: 10px;
+  --fontFamily: "Adobe Clean", sans-serif;
+
+  --colorInputIdle: #262626;
+  --colorInputActive: #fcfcfc;
+
+  --colorDisabled: #393939;
+  --colorFontDisabled: #525252;
+  --colorFontActive: #000000;
+  --colorFont: #b7b7b7;
+
+  --colorBorder: #3e3e3e;
+  --colorHover: #292929;
+  --colorActive: #1f1f1f;
+  --colorFocus: #46a0f5;
+  --colorIcon: #b4b4b4;
+
+  --colorCheckbox: #999999;
+  --colorCheckboxHover: #CDCDCD;
+
+  --borderLayer: 1.5px solid var(--colorFont);
+}
+
+body {
+  overflow: hidden;
+  background-color: var(--colorPanelBG);
+  color: var(--colorIcon);
+}
+
+.adobe-icon-angleDown:before {
+  content: "\e908";
+  color: #c3c3c3;
+}
+.adobe-icon-angleUp:before {
+  content: "\e90b";
+  color: #c3c3c3;
+}
+.adobe-icon-angleUpDown:before {
+  content: "\e915";
+  color: #c3c3c3;
+}
+.adobe-icon-file:before {
+  content: "\e916";
+  color: #c3c3c3;
+}
+.adobe-icon-folder:before {
+  content: "\e917";
+  color: #c3c3c3;
+}
+.adobe-icon-newLayer:before {
+  content: "\e900";
+  color: #c3c3c3;
+}
+.adobe-icon-angleRight:before {
+  content: "\e901";
+  color: #c3c3c3;
+}
+.adobe-icon-assetExport:before {
+  content: "\e902";
+  color: #c3c3c3;
+}
+.adobe-icon-cancel:before {
+  content: "\e903";
+  color: #c3c3c3;
+}
+.adobe-icon-checkBoxOff:before {
+  content: "\e904";
+  color: #999;
+}
+.adobe-icon-checkBoxOn:before {
+  content: "\e905";
+  color: #999;
+}
+.adobe-icon-dissect .path1:before {
+  content: "\e906";
+  color: rgb(195, 195, 195);
+  opacity: 0.5;
+}
+.adobe-icon-dissect .path2:before {
+  content: "\e907";
+  margin-left: -1.0029296875em;
+  color: rgb(195, 195, 195);
+}
+.adobe-icon-fill:before {
+  content: "\e909";
+  color: #c3c3c3;
+}
+.adobe-icon-find:before {
+  content: "\e90a";
+  color: #c3c3c3;
+}
+.adobe-icon-layerRadioOff:before {
+  content: "\e90c";
+  color: #999;
+}
+.adobe-icon-layerRadioOn:before {
+  content: "\e90d";
+  color: #999;
+}
+.adobe-icon-lock:before {
+  content: "\e90e";
+  color: #c3c3c3;
+}
+.adobe-icon-newLayer2:before {
+  content: "\e90f";
+  color: #c3c3c3;
+}
+.adobe-icon-play:before {
+  content: "\e910";
+  color: #c3c3c3;
+}
+.adobe-icon-record:before {
+  content: "\e911";
+  color: #c3c3c3;
+}
+.adobe-icon-stroke:before {
+  content: "\e912";
+  color: #c3c3c3;
+}
+.adobe-icon-trash:before {
+  content: "\e913";
+  color: #c3c3c3;
+}
+.adobe-icon-visible:before {
+  content: "\e914";
+  color: #c3c3c3;
+}
+
+
+[class^="adobe-icon-"]:active, [class*=" adobe-icon-"]:active {
+  /* cursor: pointer; */
+}
+
+#content{
+  /* display: flex; */
+  /* justify-content: center; */
+  margin-top: .93rem;
+}
+
+.adobe-toolbar-divider {
+  margin: .125rem;
+  border-top: solid 1.33px var(--colorHover);
+  opacity: 0.6;
+  width: 94%;
+}
+
+.adobe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--borderRadius);
+  border: var(--border);
+}
+
+.adobe-btn, .adobe-btn-switch, .adobe-btn-switch-off, .adobe-btn-switch-on, .adobe-btn-hover, .adobe-btn-active {
+  font-size: 14px;
+  padding: var(--btnPadding);
+  min-width: var(--btnWidth);
+  height: var(--btnHeight);
+  max-height: var(--btnHeightMax);
+  border-width: var(--globalBorderWidth);
+  border-style: solid;
+  margin: var(--btnMargin);
+  user-select: none;
+  cursor: pointer;
+}
+
+.adobe-btn:hover, .adobe-btn-switch-off:hover, .adobe-btn-switch:hover {
+  border-color: var(--colorBorder);
+  background-color: var(--colorHover);
+}
+
+.adobe-btn:active, .adobe-btn-switch-off:active, .adobe-btn-switch:active {
+  border-color: var(--colorBorder);
+  background-color: var(--colorActive);
+}
+
+.adobe-btn-hover {
+  border-width: var(--borderWidth);
+  border-color: var(--colorBorder);
+  background-color: var(--colorHover);
+}
+
+.adobe-btn-active {
+  border-color: var(--colorBorder);
+  background-color: var(--colorActive);
+}
+
+.adobe-btn-disabled {
+  padding: var(--btnPadding);
+  min-width: var(--btnWidth);
+  height: var(--btnHeight);
+  max-height: var(--btnHeightMax);
+  border-width: var(--globalBorderWidth);
+  border-style: solid;
+  margin: var(--btnMargin);
+  user-select: none;
+  color: var(--colorFontDisabled);
+}
+
+
+.adobe-btn-switch-on {
+  border-color: var(--colorBorder);
+  background-color: var(--colorActive);
+}
+
+.adobe-btn-switch-on {
+  border-color: var(--colorBorder);
+  background-color: var(--colorActive);
+}
+
+.adobe-inputGroup {
+  display: inline-block;
+  max-height: var(--inputHeight);
+}
+
+.adobe-inputGroup-suffix {
+  position: relative;
+  top: -1.4rem;
+  margin-left: 50%;
+}
+
+.adobe-input {
+  justify-content: flex-start;
+  border-style: solid;
+  background-color: var(--colorInputIdle);
+  font-size: 10px;
+  color: var(--colorFont);
+  border-width: var(--borderWidth);
+  border-color: var(--colorBorder);
+  border-radius: var(--borderRadius);
+  padding: var(--inputPadding);
+  height: var(--inputHeight);
+}
+
+.adobe-input-md {
+  min-width: 2rem;
+  max-width: 4rem;
+  /* padding: 0 .25rem; */
+}
+
+.adobe-input-lg {
+  /* width: 70%; */
+}
+
+.adobe-input:focus {
+  outline-offset: 0px;
+  background-color: var(--colorInputActive);
+  /* border-color: var(--colorActive); */
+  color: var(--colorFontActive);
+}
+
+:focus {
+  outline-width: 0px;
+}
+
+.adobe-inputGroup {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  /* width: 70%; */
+}
+
+.adobe-inputGroup-num {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  /* border: 2px solid green; */
+  max-width: 8rem;
+}
+
+.adobe-input-numUpDown {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #2A2A2A;
+  border-radius: 0px var(--borderRadius) var(--borderRadius) 0px;
+  border-width: var(--borderWidth) var(--borderWidth) var(--borderWidth) 0px;
+  border-color: var(--colorBorder);
+  border-style: solid;
+  max-width: 1rem;
+  height: var(--inputHeight);
+  padding: 0px .25rem;
+}
+
+.adobe-input-numUpDown > span {
+  position: relative;
+  /* width: 100%; */
+  /* bottom: .125rem; */
+  height: .675rem;
+}
+
+.numUpDownHalf {
+  border: 2px solid green;
+  height: 30%;
+}
+
+.adobe-input-numUpDown > span:hover {
+  background-color: var(--colorDisabled)
+}
+
+/* .adobe-menuGroup:after {
+  content: "\e901";
+  color: #000000;
+} */
+
+ul.adobe-menuGroup {
+  display: none;
+  justify-content: flex-start;
+  border-style: solid;
+  background-color: var(--colorInputIdle);
+  font-size: 10px;
+  color: var(--colorFont);
+  border-width: var(--borderWidth);
+  border-color: var(--colorBorder);
+  border-radius: var(--borderRadius);
+  list-style: none;
+  min-width: 5rem;
+}
+
+#test {
+  width: 100%;
+}
+
+.adobe-menu {
+  display: flex;
+  justify-content: space-between;
+  border-style: solid;
+  background-color: var(--colorInputIdle);
+  font-size: 11px;
+  color: var(--colorFont);
+  border-width: var(--borderWidth);
+  border-color: var(--colorBorder);
+  border-radius: var(--borderRadius);
+  padding: .5rem .25rem;
+  cursor: pointer;
+  min-width: 5rem;
+}
+
+ul.adobe-menuGroup > li {
+  font-size: 12px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  padding: .25rem;
+  background-color: var(--colorPanelBG);
+  height: var(--inputHeight);
+  user-select: none;
+  cursor: default;
+}
+
+ul.adobe-menuGroup > li:hover {
+  background-color: var(--colorBorder);
+}
+
+.adobe-menu:hover {
+  background-color: var(--colorDisabled)
+}
+
+.adobe-menu:active {
+  background-color: var(--colorActive)
+}
+
+
+/* select.adobe-menuGroup {
+  background-color: red;
+} */
+
+.adobe-input-dropDown {
+  border-radius: var(--borderRadius) 0 0 var(--borderRadius);
+}
+
+.adobe-input-num {
+  /* border-color: red; */
+  border-radius: var(--borderRadius) 0 0 var(--borderRadius);
+  min-width: 1rem;
+  max-width: 2rem;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.adobe-toolbar {
+  /* margin: 0 5%; */
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: .5rem 2%;
+  align-items: center;
+}
+
+.adobe-Group {
+  margin: .25rem 0px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border: 1.5px solid var(--colorBorder);
+  border-radius: 2px;
+}
+
+
+.adobe-checkGroup {
+  border-top-width: 0px;
+  border-bottom-width: 0px;
+  border-right-width: 0px;
+  height: var(--inputHeight);
+  width: calc(var(--inputHeight) * 2);
+  color: var(--colorCheckbox);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.adobe-checkLayer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3rem;
+  border: 1.5px solid var(--colorFont);
+  position: relative;
+  width: 6px;
+  height: 6px;
+  margin-left: .25rem;
+  cursor: pointer;
+}
+
+.adobe-checkboxGroup {
+  cursor: pointer;
+  margin: .5rem .25rem;
+  padding: .25rem;
+}
+
+.adobe-icon-checkBoxOn, .adobe-icon-checkBoxOff {
+  margin-left: .5rem;
+}
+
+.adobe-checkToggle {
+  margin-left: .25rem;
+  width: calc(var(--inputHeight)/3);
+  height: calc(var(--inputHeight)/3);
+  border: 1.5px solid black;
+  background-color: #4f80ff;
+}
+
+.adobe-input-prepend {
+  font-family: Roboto, sans-serif;
+  display: flex;
+  justify-content: flex-end;
+  margin-left: .25rem;
+  color: rgba(255,255,255,.2);
+  user-select: none;
+  cursor: default;
+}
+
+.adobe-input-prefix {
+  font-family: Roboto, sans-serif;
+  display: flex;
+  justify-content: flex-end;
+  margin-left: .25rem;
+  color: rgba(255,255,255,.2);
+  user-select: none;
+  cursor: default;
+}
+
+.adobe-alt {
+  opacity: var(--altOpacity);
+}
+
+.adobe-checkbox-suffix {
+  font-family: Roboto, sans-serif;
+  font-size: 10px;
+  display: flex;
+  justify-content: flex-end;
+  margin-left: .5rem;
+  margin-top: .25rem;
+  /* color: var(--colorFont); */
+  user-select: none;
+  cursor: pointer;
+}
+
+.adobe-checkboxGroup:hover {
+  color: var(--colorCheckboxHover);
+  /* background-color: red; */
+}
+
+
+
+/* Scrollbar */
+  ::-webkit-scrollbar {
+    display: none;
+    background: #2A2A2A;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #3E3E3E;
+    border-radius: 20px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #525252;
+  }
+
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  ::-webkit-scrollbar:single-button {
+    /* margin: 1rem 0px; */
+  }
+
+  ::-webkit-scrollbar-button:start {
+    /* background-image: url('./scrollbarUpBtnAlt.png'); */
+  }
+
+  ::-webkit-scrollbar-button:end {
+    /* background-image: url('./scrollbarDownBtnAlt.png'); */
+  }
+
+  ::-webkit-scrollbar-button:start:hover {
+    /* background-image: url('./scrollbarUpBtnAltHover.png'); */
+  }
+
+  ::-webkit-scrollbar-button:end:hover {
+    /* background-image: url('./scrollbarDownBtnAltHover.png'); */
+  }
