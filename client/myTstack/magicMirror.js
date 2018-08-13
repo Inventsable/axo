@@ -86,8 +86,8 @@ function initMagicMirror(){
 
   buildMagicMirror();
   // buildUINew();
-  console.log(checkboxLogic);
-  console.log(appUI);
+  // console.log(checkboxLogic);
+  // console.log(appUI);
 }
 
 function reset(){
@@ -104,7 +104,7 @@ function callDoc() {
       })
     })
   }
-  console.log(appUI.data);
+  // console.log(appUI.data);
 }
 
 

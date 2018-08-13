@@ -1,1 +1,93 @@
-/* none */
+:root {
+  --colorR: #f06e81;
+  --colorG: #ffed75;
+  --colorB: #6297f0;
+  --dimmed: rgba(0,0,0,.225);
+  --selected: rgba(0,0,0,.5);
+  --opacityLow: .5;
+  font-family: Rubik, sans-serif;
+  font-weight: 300;
+}
+
+.anno-text {
+  margin-top: 6px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+  user-select: none;
+}
+
+#n {
+  transform-origin: top;
+}
+
+#sw {
+  transform-origin: 0% 66%;
+}
+
+#se {
+  transform-origin: 100% 66%;
+}
+
+#n, #sw, #se {
+  cursor: pointer;
+  opacity: var(--opacityLow);
+  transition: transform 120ms var(--quart) 20ms,
+              opacity 100ms var(--quad) 50ms,
+              color 150ms var(--quart) 0ms;
+}
+
+[class*="Arrow"] {
+  fill: var(--dimmed);
+}
+
+[class*="Divider"] {
+  stroke: var(--dimmed);
+}
+
+g:hover > [class*="Arrow"] {
+  fill: var(--selected);
+}
+
+.center:hover {
+  fill: var(--colorFont);
+  transition: fill 200ms var(--quad) 20ms;
+}
+
+.rect-bounds, .nDivider, .swDivider, .seDivider {
+  fill: none;
+}
+
+.nDivider, .swDivider, .seDivider {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3px;
+  stroke-dasharray: 3 6;
+}
+
+.nBounds {
+  fill: var(--colorR);
+}
+
+.swBounds {
+  fill: var(--colorG);
+}
+
+.seBounds {
+    fill: var(--colorB);
+}
+
+.center {
+  cursor: wait;
+  fill: var(--colorPanelBG);
+}
+
+.anno {
+  opacity: 0.25;
+}
+
+.anno-text {
+  fill: #fff;
+}
