@@ -19,19 +19,19 @@
   user-select: none;
 }
 
-#n {
+#Top {
   transform-origin: top;
 }
 
-#sw {
+#Left {
   transform-origin: 0% 66%;
 }
 
-#se {
+#Right {
   transform-origin: 100% 66%;
 }
 
-#n, #sw, #se {
+#Top, #Left, #Right {
   cursor: pointer;
   opacity: var(--opacityLow);
   transition: transform 120ms var(--quart) 20ms,
@@ -56,26 +56,26 @@ g:hover > [class*="Arrow"] {
   transition: fill 200ms var(--quad) 20ms;
 }
 
-.rect-bounds, .nDivider, .swDivider, .seDivider {
+.rect-bounds, .TopDivider, .LeftDivider, .RightDivider {
   fill: none;
 }
 
-.nDivider, .swDivider, .seDivider {
+.TopDivider, .LeftDivider, .RightDivider {
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 3px;
   stroke-dasharray: 3 6;
 }
 
-.nBounds {
+.TopBounds {
   fill: var(--colorR);
 }
 
-.swBounds {
+.LeftBounds {
   fill: var(--colorG);
 }
 
-.seBounds {
+.RightBounds {
     fill: var(--colorB);
 }
 
