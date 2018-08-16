@@ -5,7 +5,7 @@ function mainfunc() {
         for (i = 0; i < thisDoc.selection.length; i++) {
             selectedObject = thisDoc.selection[i];
             //selectedObject.rotate(-90);
-            
+
             // Scale Y
             AngToRad = toRadians(ang);
             scale1 = Math.cos(AngToRad) * 100;

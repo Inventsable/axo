@@ -8,7 +8,11 @@ var appName = csInterface.hostEnvironment.appName;
 loadUniversalJSXLibraries();
 loadJSX('axo30.jsx');
 
+
+window.Event = new Vue();
+
 Vue.component('gamepad', {
+  // props: ['angle'],
   template: `
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150">
     <title>axoMenu</title>
@@ -33,8 +37,33 @@ Vue.component('gamepad', {
     </g>
   </svg>
   `,
+  // <line v-for="wind in directions" v-if="(item.direction == wind.name)" :class="item.direction + 'Divider'" x1="wind.x1" y1="wind.y1" x2="wind.x2" y2="wind.y2"/>
+  // <line v-for="wind in directions" v-if="(item.direction == wind.name)" :class="item.direction + 'Divider'" x1="95.9" y1="12.46" x2="95.9" y2="60.33"/>
   data() {
     return {
+      directions : [
+        {
+          name: 'Top',
+          x1 : '95.9',
+          y1 : '12.46',
+          x2 : '95.9',
+          y2 : '60.33',
+        },
+        {
+          name: 'Left',
+          x1 : '41.51',
+          y1 : '106.69',
+          x2 : '82.97',
+          y2 : '82.75',
+        },
+        {
+          name: 'Right',
+          x1 : '150.31',
+          y1 : '106.68',
+          x2 : '108.85',
+          y2 : '82.74',
+        }
+      ],
       section : [
         {
           direction: 'Top',
@@ -58,18 +87,32 @@ Vue.component('gamepad', {
           acwArrow: 'M133.07,79.33a1.06,1.06,0,0,0-.3.88,1.1,1.1,0,0,0,.52.78l6.21,3.58a1.07,1.07,0,0,0,.52.14,1.15,1.15,0,0,0,.41-.08,1,1,0,0,0,.61-.69l4.87-17.49Z',
         },
       ],
+      // angle : 30,
     }
   },
+  created() {
+    Event.$on('angShift', function(e) {
+      this.angle = e;
+      console.log('Angle changed to ' + this.angle);
+    })
+  },
+  // computed() {
+  //   angle: function () {
+  //     // return
+  //   }
+  // },
   methods: {
-    SSRcw : function(msg) {
-      console.log(`SSR(-30, '${msg}')`);
-      csInterface.evalScript(`SSR('-30', '${msg}')`, function(e){
+    SSRcw : function(dir) {
+      // this.angle = (this.angle > 0) ? this.angle * -1 : this.angle;
+      console.log(`SSR(${this.angle}, '${dir}')`);
+      csInterface.evalScript(`SSR('-30', '${dir}')`, function(e){
         // console.log('Successful ' + e.data);
       })
     },
-    SSRacw : function(msg) {
-      console.log(`SSR(30, '${msg}')`);
-      csInterface.evalScript(`SSR('30', '${msg}')`, function(e){
+    SSRacw : function(dir) {
+      // this.angle = (this.angle < 0) ? this.angle * -1 : this.angle;
+      // console.log(`SSR(${this.angle}, '${dir}')`);
+      csInterface.evalScript(`SSR('30', '${dir}')`, function(e){
         // console.log('Successful ' + e.data);
       })
     },
@@ -102,44 +145,62 @@ Vue.component('gamepad', {
   }
 })
 
-Vue.component('anno', {
-  props: ['state'],
-  template: `
-    <span class="anno-text" @newAnno="updateData">{{ text }}</span>
-  `,
-  data() {
-    return {
-      text : 'default',
-    }
-  },
-  methods: {
-    updateData: function(newData) {
-      this.text = newData;
-    }
-  }
-})
+// Vue.component('anno', {
+//   props: ['state'],
+//   template: `
+//     <span class="anno-text" @newAnno="updateData">{{ text }}</span>
+//   `,
+//   data() {
+//     return {
+//       text : 'default',
+//     }
+//   },
+//   methods: {
+//     updateData: function(newData) {
+//       this.text = newData;
+//     }
+//   },
+// })
 
 Vue.component('toolbar', {
   template: `
     <div class="adobe-toolbar">
-      <div class="adobe adobe-btn-switch">
-        <span class="adobe-icon-folder"></span>
+      <div class="adobe adobe-btn-switch" @click="changeAngle(10)">
+        <span>10</span>
       </div>
-      <div class="adobe adobe-btn-switch">
-        <span class="adobe-icon-file"></span>
+      <div class="adobe adobe-btn-switch-on" @click="changeAngle(30)">
+        <span>30</span>
+      </div>
+      <div class="adobe adobe-btn-switch" @click="changeAngle(40)">
+        <span>40</span>
       </div>
       <div class="adobe-toolbar-divider"></div>
     </div>
   `,
+  methods: {
+    changeAngle : function(newAng) {
+      console.log('toolbar works with ' + newAng);
+      Event.$emit('angShift', newAng)
+    }
+  }
 })
 
 
 var app = new Vue({
   el: '#app',
   data: {
-
+    // ang: 30,
   },
-  methods: {
-
-  },
+  // methods: {
+  //   updateAngle : function(newAngle) {
+  //     this.ang = newAngle;
+  //   },
+  // },
+  // created() {
+  //   Event.$on('angShift', function(e) {
+  //     this.ang = e;
+  //     console.log(this.ang);
+  //   })
+  //   // console.log('Hello');
+  // }
 });

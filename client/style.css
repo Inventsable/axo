@@ -69,14 +69,17 @@ g:hover > [class*="Arrow"] {
 
 .TopBounds {
   fill: var(--colorR);
+  stroke: var(--colorR);
 }
 
 .LeftBounds {
   fill: var(--colorG);
+  stroke: var(--colorG);
 }
 
 .RightBounds {
     fill: var(--colorB);
+    stroke: var(--colorB);
 }
 
 .center {

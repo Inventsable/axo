@@ -14,7 +14,7 @@ function mainfunc() {
             selectedObject.resize(scale1, scale2);
 
             // Shear
-            
+
             var im = app.getIdentityMatrix();
 
             //im.mValueB = .5; // skew y 50%

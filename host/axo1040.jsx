@@ -11,6 +11,24 @@ var origins = [];
 // SSR(-30, 'Left')
 // SSR(30, 'Left')
 
+// BENCHMARK 10:
+// SSR(-10, 'Top')
+// SSR(10, 'Top')
+// SSR(-10, 'Right')
+// SSR(10, 'Right')
+// SSR(-10, 'Left')
+// SSR(10, 'Left')
+
+// BENCHMARK 40 PASSED:
+// SSR(-40, 'Top')
+// SSR(40, 'Top')
+// SSR(-40, 'Right')
+// SSR(40, 'Right')
+// SSR(-40, 'Left')
+// SSR(40, 'Left')
+
+
+
 function SSR(ang, direction){
   if (exist && hasPath) {
     for (i = 0; i < thisDoc.selection.length; i++) {
@@ -23,14 +41,40 @@ function calcSSR(ang, direction, selectedObject) {
   //// If not tagged, record original position as array [x1, y1, x2, y2]
   //// Add tag with direction and angle, push originRect to global array: origins
 
+  if ((ang == 10) | (ang == -10)) {
+    if ((direction == 'Top') && (ang < 0)) {
+      selectedObject.rotate(-90);
+      ang = 40;
+    } else if (direction == 'Left')
+      ang = -10;
+      else
+      ang = 40;
+  }
+
+  if ((ang == 40) | (ang == -40)) {
+    if ((direction == 'Top') && (ang > 0)) {
+      selectedObject.rotate(90);
+      ang = -40;
+    } else if (direction == 'Right') {
+      ang = 10;
+    } else {
+      ang = -40;
+    }
+  }
+
   // Scale
   AngToRad = toRadians(ang);
+
+
+  // scale1 = (ang == 30)
+  // scale1 = 100;
   scale2 = Math.cos(AngToRad) * 100;
-  selectedObject.resize(100, scale2);
+  scale1 = ((ang == 30) | (ang == -30)) ? 100 : scale2;
+  selectedObject.resize(scale1, scale2);
 
   // Shear
   var im = app.getIdentityMatrix();
-  if (direction == 'Top')
+  if ((direction == 'Top') && ((ang == 40) | (ang == -40)))
     DeltaAngToRad = toRadians(-ang);
   else
     DeltaAngToRad = toRadians(ang);
@@ -39,13 +83,13 @@ function calcSSR(ang, direction, selectedObject) {
 
   switch (direction) {
     case 'Right':
-      if (ang < 0)
+      if (ang == -30)
         selectedObject.rotate(3 * ang);
       else
         selectedObject.rotate(ang);
       break;
     case 'Left':
-      if (ang > 0)
+      if (ang == 30)
         selectedObject.rotate(3 * ang);
       else
         selectedObject.rotate(ang);

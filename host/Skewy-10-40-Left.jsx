@@ -9,9 +9,9 @@ function mainfunc() {
             // Scale Y
             AngToRad = toRadians(ang);
             scale2 = Math.cos(AngToRad) * 100;
-            // 
+            scale1 = 100;
 
-            selectedObject.resize(100, scale2);
+            selectedObject.resize(scale1, scale2);
 
             // Shear
 

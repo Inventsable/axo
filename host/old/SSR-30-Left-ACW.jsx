@@ -14,6 +14,7 @@ if (app.documents.length > 0 && app.activeDocument.pathItems.length > 0) {
 
         // Scale Y
         AngToRad = toRadians(ang);
+        
         scale2 = Math.cos(AngToRad) * 100;
         selectedObject.resize(100, scale2);
 

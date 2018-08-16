@@ -25,7 +25,7 @@ function mainfunc() {
             selectedObject.transform(im, true, true, true, true, 1, undefined);
 
             // Rotate
-            
+
             selectedObject.rotate(ang);
 
         }
