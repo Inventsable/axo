@@ -1,0 +1,215 @@
+:root {
+  --colorR: #f06e81;
+  --colorG: #ffed75;
+  --colorB: #6297f0;
+  --colorRoutline: var(--colorPanelBG);
+  --colorGoutline: var(--colorPanelBG);
+  --colorBoutline: var(--colorPanelBG);
+  --Topdivider: var(--colorPanelBG);
+  --Leftdivider: var(--colorPanelBG);
+  --Rightdivider: var(--colorPanelBG);
+
+  --dimmed: rgba(0,0,0,.225);
+  --selected: rgba(0,0,0,.5);
+  --opacityLow: .5;
+  font-family: Rubik, sans-serif;
+  font-weight: 300;
+}
+
+.anno-text {
+  margin-top: 6px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+  user-select: none;
+}
+
+#Top {
+  transform-origin: top;
+}
+
+#Left {
+  transform-origin: 0% 66%;
+}
+
+#Right {
+  transform-origin: 100% 66%;
+}
+
+#Top, #Left, #Right {
+  cursor: pointer;
+  opacity: var(--opacityLow);
+  transition: transform 120ms var(--quart) 20ms,
+              opacity 100ms var(--quad) 50ms,
+              color 150ms var(--quart) 0ms;
+}
+
+[class*="Arrow"] {
+  fill: var(--dimmed);
+}
+
+[class*="Divider"] {
+  stroke: var(--dimmed);
+}
+
+g:hover > [class*="Arrow"] {
+  fill: var(--selected);
+}
+
+.center:hover {
+  fill: var(--colorFont);
+  transition: fill 200ms var(--quad) 20ms;
+}
+
+/* .rect-bounds, .TopDivider, .LeftDivider, .RightDivider {
+  fill: none;
+} */
+
+/* .TopDivider, .LeftDivider, .RightDivider {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3px;
+  stroke-dasharray: 3 6;
+} */
+
+.TopBounds {
+  fill: var(--colorR);
+  stroke: var(--colorR);
+}
+
+.LeftBounds {
+  fill: var(--colorG);
+  stroke: var(--colorG);
+}
+
+.RightBounds {
+    fill: var(--colorB);
+    stroke: var(--colorB);
+}
+
+.center {
+  cursor: wait;
+  fill: var(--colorPanelBG);
+}
+
+.anno {
+  opacity: 0.25;
+}
+
+.anno-text {
+  fill: #fff;
+}
+
+
+
+/* 1040 */
+
+
+#TopGroup {
+  transform-origin: top;
+}
+
+#LeftGroup {
+  transform-origin: 0% 66%;
+}
+
+#RightGroup {
+  transform-origin: 100% 66%;
+}
+
+#TopGroup, #LeftGroup, #RightGroup {
+  cursor: pointer;
+  /* fill: none;
+  opacity: var(--opacityLow);
+  transition: transform 120ms var(--quart) 20ms,
+              opacity 100ms var(--quad) 50ms,
+              color 150ms var(--quart) 0ms; */
+}
+
+
+[class*="Flag"] {
+  opacity: var(--opacityLow);
+}
+
+[class*="Bumper"] {
+  opacity: 0;
+}
+
+/* polygon {
+  opacity: var(--opacityLow);
+} */
+
+[id*="Group"]:hover > [class*="Bumper"] {
+  opacity: 1;
+}
+
+
+
+.TopBumper {
+  fill: var(--colorR);
+}
+
+.LeftBumper {
+  fill: var(--colorG);
+}
+
+.RightBumper {
+  fill: var(--colorB);
+}
+
+.TopFlag {
+  fill: var(--colorR);
+}
+
+.LeftFlag {
+  fill: var(--colorG);
+}
+
+.RightFlag {
+  fill: var(--colorB);
+}
+
+
+.TopCrop {
+  stroke: var(--colorRoutline);
+}
+
+.LeftCrop {
+  stroke: var(--colorGoutline);
+}
+
+.RightCrop {
+  stroke: var(--colorBoutline);
+}
+
+.TopDivider {
+  stroke: var(--colorRdivider);
+}
+
+.LeftDivider {
+  stroke: var(--colorGdivider);
+}
+
+.RightDivider {
+  stroke: var(--colorBdivider);
+}
+
+.Divider {
+  stroke-linecap: round;
+  stroke-width: 5px;
+}
+
+.Rect {
+  fill: none;
+}
+
+[class*="Crop"] {
+  stroke-width: 10px;
+  fill: transparent;
+}
+
+.Core {
+  fill: var(--colorPanelBG);
+}

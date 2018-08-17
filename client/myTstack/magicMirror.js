@@ -294,7 +294,7 @@ function buildMagicMirror(){
 
     if (hasClass(v, 'adobe-input-num')) {
         v.addEventListener("mouseover", function(evtTier){
-          console.log(evtTier);
+          // console.log(evtTier);
         });
         v.addEventListener("wheel", function(evt){
           var newNum = v.value;
@@ -304,21 +304,21 @@ function buildMagicMirror(){
           if (hasDigit.test(newNum)) {
             var extension = newNum.match(extType, 'g');
             extension = extension[0];
-            console.log(newNum);
+            // console.log(newNum);
             // var integer = newNum.match(/(\-|\d)*(\.|\d)*(?=(\s|\w*))/);
             var integer = newNum.match(/((([^\.]\d|\-)*(\.\d)|\d*))(?=(\d|\s|\w|\.)*(\d|\w|\.)*)/);
-            console.log(integer);
+            // console.log(integer);
             var convert = integer[0];
-            console.log(convert);
+            // console.log(convert);
             if (/(\d|\-)*\.(\d)*/.test(convert)) {
-              console.log('This is floating:');
+              // console.log('This is floating:');
               convert = parseFloat(integer[0]).toFixed(1);
             } else {
               convert = parseInt(integer[0]);
             }
-            console.log(convert);
+            // console.log(convert);
             if (evt.deltaY < 0) {
-              console.log("Scrolling up");
+              // console.log("Scrolling up");
               if (evt.shiftKey) {
                 convert = increment(true, 'shift', convert);
               } else if (evt.ctrlKey) {
@@ -335,8 +335,8 @@ function buildMagicMirror(){
                 convert--;
               }
             }
-            console.log(convert);
-            v.value = convert + " " + extension;
+            // console.log(convert);
+            v.value = convert + extension;
           }
         }, false)
     }
@@ -349,7 +349,7 @@ function addScroll(){
 
 
 function increment(dir, key, n) {
-  console.log(n);
+  // console.log(n);
   // n = parseInt(n);
   // console.log(n);
   switch (key) {

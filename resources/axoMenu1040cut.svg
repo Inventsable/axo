@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 191.82 145.28">
+  <g id="N">
+    <polygon id="TopCW" class="TopBumper" points=""/>
+    <polygon id="TopACW" class="TopBumper" points=""/>
+    <line id="divider" class="Divider" x1="95.91" y1="73.64" x2="95.91" y2="10.42"/>
+    <path class="Bumper" d=""/>
+    <polygon id="TopBounds" class="Crop" points=""/>
+  </g>
+  <g id="SW">
+    <polygon data-name="cw" class="LeftBumper" points=""/>
+    <polygon data-name="acw" class="LeftBumper" points=""/>
+    <line id="divider-2" data-name="divider" class="Divider" x1="95.91" y1="73.64" x2="41.16" y2="105.24"/>
+    <path id="bumper-2" data-name="bumper" d=""/>
+    <polygon id="bounds-2" data-name="bounds" class="Crop" points=""/>
+  </g>
+  <g id="SE">
+    <polygon data-name="cw" class="RightBumper" points=""/>
+    <polygon data-name="acw" class="RightBumper" points=""/>
+    <line id="divider-3" data-name="divider" class="Divider" x1="95.91" y1="73.64" x2="150.65" y2="105.24"/>
+    <path id="bumper-3" data-name="bumper" d=""/>
+    <polygon id="bounds-3" data-name="bounds" class="Crop" points=""/>
+  </g>
+  <g id="center">
+    <circle class="Core" cx="95.91" cy="72.64" r="17.47"/>
+  </g>
+  <g id="frame">
+    <rect class="Rect" width="191.82" height="145.28"/>
+  </g>
+</svg>

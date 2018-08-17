@@ -2,6 +2,20 @@
   --colorR: #f06e81;
   --colorG: #ffed75;
   --colorB: #6297f0;
+  --colorRdark: #915059;
+  --colorGdark: #988F53;
+  --colorBdark: #4A6F91;
+
+  --strLG: 10px;
+  --strMD: 5px;
+
+  --colorRoutline: var(--colorPanelBG);
+  --colorGoutline: var(--colorPanelBG);
+  --colorBoutline: var(--colorPanelBG);
+  --TopDivider: none;
+  --LeftDivider: none;
+  --RightDivider: none;
+
   --dimmed: rgba(0,0,0,.225);
   --selected: rgba(0,0,0,.5);
   --opacityLow: .5;
@@ -9,88 +23,116 @@
   font-weight: 300;
 }
 
-.anno-text {
-  margin-top: 6px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: default;
-  user-select: none;
-}
 
-#Top {
+#TopGroup {
   transform-origin: top;
 }
 
-#Left {
+#LeftGroup {
   transform-origin: 0% 66%;
 }
 
-#Right {
+#RightGroup {
   transform-origin: 100% 66%;
 }
 
-#Top, #Left, #Right {
+#TopGroup, #LeftGroup, #RightGroup {
   cursor: pointer;
-  opacity: var(--opacityLow);
+  pointer-events: none;
   transition: transform 120ms var(--quart) 20ms,
               opacity 100ms var(--quad) 50ms,
               color 150ms var(--quart) 0ms;
 }
 
-[class*="Arrow"] {
-  fill: var(--dimmed);
+[class*="Crop"] {
+  pointer-events: stroke;
+  stroke-width: var(--strLG);
+  fill: transparent;
+}
+
+[class*="Flag"] {
+  pointer-events: fill;
+  /* opacity: var(--opacityLow); */
+}
+
+[class*="Bumper"] {
+  opacity: 0;
+  transition: opacity 100ms var(--quad) 0ms;
 }
 
 [class*="Divider"] {
-  stroke: var(--dimmed);
+  stroke-linecap: round;
+  stroke-width: var(--strMD);
+  transition: stroke 120ms var(--quart) 20ms,
+              opacity 100ms var(--quad) 0ms,
+              stroke-width 50ms var(--quart) 0ms;
 }
 
-g:hover > [class*="Arrow"] {
-  fill: var(--selected);
+/* polygon {
+  opacity: var(--opacityLow);
+} */
+
+[id*="Group"]:hover > [class*="Bumper"] {
+  opacity: 1;
 }
 
-.center:hover {
-  fill: var(--colorFont);
-  transition: fill 200ms var(--quad) 20ms;
+.TopBumper {
+  fill: var(--colorR);
 }
 
-.rect-bounds, .TopDivider, .LeftDivider, .RightDivider {
+.LeftBumper {
+  fill: var(--colorG);
+}
+
+.RightBumper {
+  fill: var(--colorB);
+}
+
+.TopFlag {
+  fill: var(--colorRdark);
+  stroke: var(--colorRdark);
+}
+
+.LeftFlag {
+  fill: var(--colorGdark);
+  stroke: var(--colorGdark);
+}
+
+.RightFlag {
+  fill: var(--colorBdark);
+  stroke: var(--colorBdark);
+}
+
+.TopCrop {
+  stroke: var(--colorRoutline);
+}
+
+
+
+.LeftCrop {
+  stroke: var(--colorGoutline);
+}
+
+.RightCrop {
+  stroke: var(--colorBoutline);
+}
+
+.TopDivider {
+  stroke: var(--TopDivider);
+}
+
+.LeftDivider {
+  stroke: var(--LeftDivider);
+}
+
+.RightDivider {
+  stroke: var(--RightDivider);
+}
+
+.Rect {
   fill: none;
 }
 
-.TopDivider, .LeftDivider, .RightDivider {
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 3px;
-  stroke-dasharray: 3 6;
-}
-
-.TopBounds {
-  fill: var(--colorR);
-  stroke: var(--colorR);
-}
-
-.LeftBounds {
-  fill: var(--colorG);
-  stroke: var(--colorG);
-}
-
-.RightBounds {
-    fill: var(--colorB);
-    stroke: var(--colorB);
-}
-
-.center {
-  cursor: wait;
+.Core {
   fill: var(--colorPanelBG);
-}
-
-.anno {
-  opacity: 0.25;
-}
-
-.anno-text {
-  fill: #fff;
 }

@@ -64,12 +64,15 @@ function calcSSR(ang, direction, selectedObject) {
 
   // Scale
   AngToRad = toRadians(ang);
-
-
-  // scale1 = (ang == 30)
-  // scale1 = 100;
   scale2 = Math.cos(AngToRad) * 100;
-  scale1 = ((ang == 30) | (ang == -30)) ? 100 : scale2;
+
+  if ((ang == 30) | (ang == -30)) {
+    console.log('Thirty!');
+    scale1 = 100;
+  } else {
+    scale1 = scale2;
+  }
+  // scale1 = ((ang == 30) | (ang == -30)) ? 100 : scale2;
   selectedObject.resize(scale1, scale2);
 
   // Shear
@@ -81,6 +84,7 @@ function calcSSR(ang, direction, selectedObject) {
   im.mValueC = Math.tan(DeltaAngToRad);
   selectedObject.transform(im, true, true, true, true, 1, undefined);
 
+// Rotate
   switch (direction) {
     case 'Right':
       if (ang == -30)
