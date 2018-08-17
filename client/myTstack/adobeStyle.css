@@ -258,11 +258,6 @@ body {
   background-color: var(--colorActive);
 }
 
-.adobe-btn-switch-on {
-  border-color: var(--colorBorder);
-  background-color: var(--colorActive);
-}
-
 .adobe-inputGroup {
   display: inline-block;
   max-height: var(--inputHeight);

@@ -8,11 +8,13 @@ var appName = csInterface.hostEnvironment.appName;
 loadUniversalJSXLibraries();
 loadJSX('axo30.jsx');
 
-
+// Event handler
 window.Event = new Vue();
 
+// Constant source of truth
+var trueAngle = 30;
+
 Vue.component('gamepad', {
-  // props: ['angle'],
   template: `
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150">
     <title>axoMenu</title>
@@ -41,29 +43,6 @@ Vue.component('gamepad', {
   // <line v-for="wind in directions" v-if="(item.direction == wind.name)" :class="item.direction + 'Divider'" x1="95.9" y1="12.46" x2="95.9" y2="60.33"/>
   data() {
     return {
-      directions : [
-        {
-          name: 'Top',
-          x1 : '95.9',
-          y1 : '12.46',
-          x2 : '95.9',
-          y2 : '60.33',
-        },
-        {
-          name: 'Left',
-          x1 : '41.51',
-          y1 : '106.69',
-          x2 : '82.97',
-          y2 : '82.75',
-        },
-        {
-          name: 'Right',
-          x1 : '150.31',
-          y1 : '106.68',
-          x2 : '108.85',
-          y2 : '82.74',
-        }
-      ],
       section : [
         {
           direction: 'Top',
@@ -87,34 +66,33 @@ Vue.component('gamepad', {
           acwArrow: 'M133.07,79.33a1.06,1.06,0,0,0-.3.88,1.1,1.1,0,0,0,.52.78l6.21,3.58a1.07,1.07,0,0,0,.52.14,1.15,1.15,0,0,0,.41-.08,1,1,0,0,0,.61-.69l4.87-17.49Z',
         },
       ],
-      // angle : 30,
+      angle : trueAngle,
     }
   },
   created() {
     Event.$on('angShift', function(e) {
       this.angle = e;
+      // This does work
+      console.log('True receieved as ' + trueAngle);
       console.log('Angle changed to ' + this.angle);
     })
   },
-  // computed() {
-  //   angle: function () {
-  //     // return
-  //   }
-  // },
   methods: {
     SSRcw : function(dir) {
-      // this.angle = (this.angle > 0) ? this.angle * -1 : this.angle;
-      console.log(`SSR(${this.angle}, '${dir}')`);
-      csInterface.evalScript(`SSR('-30', '${dir}')`, function(e){
-        // console.log('Successful ' + e.data);
-      })
+      trueAngle = (trueAngle > 0) ? trueAngle * -1 : trueAngle;
+      console.log('True clicked is ' + trueAngle);
+      console.log(`SSR(${trueAngle}, '${dir}')`);
+      // csInterface.evalScript(`SSR('-30', '${dir}')`, function(e){
+      //   // console.log('Successful ' + e.data);
+      // })
     },
     SSRacw : function(dir) {
-      // this.angle = (this.angle < 0) ? this.angle * -1 : this.angle;
-      // console.log(`SSR(${this.angle}, '${dir}')`);
-      csInterface.evalScript(`SSR('30', '${dir}')`, function(e){
-        // console.log('Successful ' + e.data);
-      })
+      trueAngle = (trueAngle < 0) ? trueAngle * -1 : trueAngle;
+      console.log('True clicked is ' + trueAngle);
+      console.log(`SSR(${trueAngle}, '${dir}')`);
+      // csInterface.evalScript(`SSR('30', '${dir}')`, function(e){
+      //   // console.log('Successful ' + e.data);
+      // })
     },
     maximizeThis: function(section) {
       this.section.forEach(function(v,i,a){
@@ -179,7 +157,9 @@ Vue.component('toolbar', {
   `,
   methods: {
     changeAngle : function(newAng) {
+      trueAngle = newAng;
       console.log('toolbar works with ' + newAng);
+      console.log('true has been shifted to ' + trueAngle);
       Event.$emit('angShift', newAng)
     }
   }
