@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 191.82 145.28">
+  <defs>
+    <style>
+      .cls-1, .cls-3 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: none;
+      }
+
+      .cls-3 {
+        stroke: #000;
+        stroke-miterlimit: 10;
+        stroke-width: 5px;
+      }
+    </style>
+  </defs>
+  <title>axoMenu1040core</title>
+  <g id="center">
+    <circle class="cls-1" cx="95.91" cy="72.64" r="17.47"/>
+  </g>
+  <g id="frame">
+    <rect class="cls-2" width="191.82" height="145.28"/>
+  </g>
+  <g id="newCore">
+    <circle class="cls-3" cx="95.91" cy="72.64" r="15.19"/>
+  </g>
+</svg>

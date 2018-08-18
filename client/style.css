@@ -5,6 +5,8 @@
   --colorRdark: #915059;
   --colorGdark: #988F53;
   --colorBdark: #4A6F91;
+  --colorCenter: var(--colorPanelBG);
+  --colorStrCenter: var(--colorPanelBG);
 
   --strLG: 10px;
   --strMD: 5px;
@@ -19,10 +21,26 @@
   --dimmed: rgba(0,0,0,.225);
   --selected: rgba(0,0,0,.5);
   --opacityLow: .5;
+  --coreOpacity: 1;
+  --cropOpacity: 1;
+  --bumperOpacity: 0;
+  --allOpacity: 1;
+  --allScale: 1;
   font-family: Rubik, sans-serif;
   font-weight: 300;
 }
 
+body {
+  height: 250px;
+}
+
+svg {
+  transform-origin: center;
+  transform: scale(var(--allScale));
+  opacity: var(--allOpacity);
+  transition: transform 120ms var(--quart) 20ms,
+                opacity 100ms var(--quad)  50ms;
+}
 
 #TopGroup {
   transform-origin: top;
@@ -40,40 +58,41 @@
   cursor: pointer;
   pointer-events: none;
   transition: transform 120ms var(--quart) 20ms,
-              opacity 100ms var(--quad) 50ms,
-              color 150ms var(--quart) 0ms;
+                opacity 100ms var(--quad)  50ms,
+                  color 150ms var(--quart) 0ms;
 }
 
 [class*="Crop"] {
   pointer-events: stroke;
+  stroke-linejoin: round;
   stroke-width: var(--strLG);
+  opacity: var(--cropOpacity);
   fill: transparent;
+  transition: opacity 130ms var(--quad) 20ms,
+               stroke 130ms var(--quad) 20ms,
+                 fill 130ms var(--quad) 20ms;
 }
 
 [class*="Flag"] {
   pointer-events: fill;
-  /* opacity: var(--opacityLow); */
+  transition: opacity 130ms var(--quad) 20ms,
+               stroke 130ms var(--quad) 20ms,
+                 fill 130ms var(--quad) 20ms;
 }
 
 [class*="Bumper"] {
-  opacity: 0;
+  opacity: var(--bumperOpacity);
   transition: opacity 100ms var(--quad) 0ms;
 }
 
 [class*="Divider"] {
   stroke-linecap: round;
   stroke-width: var(--strMD);
-  transition: stroke 120ms var(--quart) 20ms,
-              opacity 100ms var(--quad) 0ms,
-              stroke-width 50ms var(--quart) 0ms;
+  transition: stroke 120ms var(--quart) 20ms;
 }
 
-/* polygon {
-  opacity: var(--opacityLow);
-} */
-
 [id*="Group"]:hover > [class*="Bumper"] {
-  opacity: 1;
+  /* opacity: 1; */
 }
 
 .TopBumper {
@@ -134,5 +153,13 @@
 }
 
 .Core {
-  fill: var(--colorPanelBG);
+  fill: var(--colorCenter);
+  stroke: var(--colorStrCenter);
+  stroke-width: var(--strMD);
+  transform-origin: center;
+  opacity: var(--coreOpacity);
+  transition: fill 100ms var(--quad)  20ms,
+            stroke 100ms var(--quad)  20ms,
+           opacity 120ms var(--quart) 20ms,
+         transform 120ms var(--quart) 20ms;
 }

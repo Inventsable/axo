@@ -39,16 +39,16 @@
           <Geometry>
             <Size>
               <!-- 7) -->
-              <Height>120</Height>
-              <Width>100</Width>
+              <Height>250</Height>
+              <Width>150</Width>
             </Size>
             <MaxSize>
-              <Height>280</Height>
+              <Height>250</Height>
               <Width>150</Width>
             </MaxSize>
             <MinSize>
-              <Height>280</Height>
-              <Width>104</Width>
+              <Height>250</Height>
+              <Width>120</Width>
             </MinSize>
           </Geometry>
           <Icons />
