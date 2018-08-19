@@ -11,6 +11,56 @@ var origins = [];
 // SSR(-30, 'Left')
 // SSR(30, 'Left')
 
+var directions = ['Top', 'Left', 'Right'];
+tagSSR('Right');
+
+function tagSSR(direction) {
+  var seek = [];
+  if (exist && hasPath) {
+    for (n = 0; n < thisDoc.pageItems.length; n++) {
+      var thisItem = thisDoc.pageItems[n];
+      if (thisItem.selected) {
+        for (i = 0; i < thisItem.tags.length; i++) {
+          var thisTag = thisItem.tags[i];
+          if (isTagged(thisTag)) {
+            seek.push(thisTag.value)
+          }
+        }
+        // addTag(thisDoc.pageItems[n].tags, 'SSR', direction)
+      }
+    }
+    if (seek.length) {
+      alert(seek.length + ' tags total')
+    } else {
+      alert('No tags found in these objects')
+    }
+    // alert(seek.length)
+  }
+
+  function addTag(tagList, name, value) {
+    var tempTag = tagList.add();
+    tempTag.name = name;
+    tempTag.value = value;
+    return tempTag;
+  }
+
+  function isTagged(tag) {
+    // var match = false;
+    if (tag.name == 'SSR') {
+      return true;
+      // for (i = 0; i < directions.length; i++) {
+      //   if (tag.value == directions[i]) {
+      //     match = directions[i];
+      //     // alert('Match at ' + directions[i])
+      //   }
+      // }
+    } else {
+      return false;
+    }
+    // return match;
+  }
+}
+
 function SSR(ang, direction){
   if (exist && hasPath) {
     for (i = 0; i < thisDoc.selection.length; i++) {
@@ -20,9 +70,6 @@ function SSR(ang, direction){
 }
 
 function calcSSR(ang, direction, selectedObject) {
-  //// If not tagged, record original position as array [x1, y1, x2, y2]
-  //// Add tag with direction and angle, push originRect to global array: origins
-
   // Scale
   AngToRad = toRadians(ang);
   scale2 = Math.cos(AngToRad) * 100;
@@ -37,23 +84,14 @@ function calcSSR(ang, direction, selectedObject) {
   im.mValueC = Math.tan(DeltaAngToRad);
   selectedObject.transform(im, true, true, true, true, 1, undefined);
 
-  switch (direction) {
-    case 'Right':
-      if (ang < 0)
-        selectedObject.rotate(3 * ang);
-      else
-        selectedObject.rotate(ang);
-      break;
-    case 'Left':
-      if (ang > 0)
-        selectedObject.rotate(3 * ang);
-      else
-        selectedObject.rotate(ang);
-      break;
-    default:
-      selectedObject.rotate(ang);
-      break;
-  }
+  // Rotate
+  if ((direction == 'Right') && (ang < 0))
+    selectedObject.rotate(3 * ang);
+  else if ((direction == 'Left') && (ang > 0))
+    selectedObject.rotate(3 * ang);
+  else
+    selectedObject.rotate(ang);
+
   return selectedObject;
 }
 
