@@ -248,6 +248,43 @@ Vue.component('toolbar', {
 var app = new Vue({
   el: '#app',
   data: {
-    // ang: 30,
+    bg: document.getElementById('panel'),
+    colorLabel: ['R', 'G', 'B'],
+    color: ['#915059', '#988F53', '#4A6F91'],
+    isSleeping: false,
+  //   css: [
+  //     { coreOpacity : 1 },
+  //     { cropOpacity : 1 },
+  //     { bumperOpacity : 1 },
+  //     { allOpacity : 1 },
+  //     { coreOpacity : 1 },
+  // ],
   },
+  // methods: {
+  //   wake : function() {
+  //     for (var i = 0; i < this.color.length; i++) {
+  //       // changeCSSVar('color' + this.colorLabel[i] + 'dark', this.color[i]);
+  //       changeCSSVar('color' + this.colorLabel[i] + 'outline', '#323232');
+  //     }
+  //     // changeCSSVar('colorCenter', '#545454')
+  //     changeCSSVar('coreOpacity', '1');
+  //     changeCSSVar('cropOpacity', '1');
+  //     changeCSSVar('allScale', '1');
+  //     changeCSSVar('allOpacity', '1');
+  //     // changeCSSVar('bumperOpacity', '.5');
+  //     this.isSleeping = false;
+  //   },
+  //   sleep : function() {
+  //     for (var i = 0; i < this.color.length; i++) {
+  //       // changeCSSVar('color' + axo.colorLabel[i] + 'dark', '#323232');
+  //       changeCSSVar('color' + axo.colorLabel[i] + 'outline', axo.color[i]);
+  //     }
+  //     changeCSSVar('coreOpacity', '0');
+  //     changeCSSVar('cropOpacity', '0');
+  //     changeCSSVar('allScale', '.875');
+  //     changeCSSVar('allOpacity', '.5');
+  //     changeCSSVar('bumperOpacity', '0');
+  //     this.isSleeping = true;
+  //   }
+  // },
 });
