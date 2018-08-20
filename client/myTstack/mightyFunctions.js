@@ -6,6 +6,13 @@ function dispatchEvent(name, data) {
   csInterface.dispatchEvent(event);
 }
 
+function toPlayWrite(...args) {
+  if (args.length > 1) {
+    dispatchEvent('com.playwrite.rewrite', args[1]);
+  }
+  dispatchEvent('com.playwrite.console', args[0]);
+}
+
 function chainEvent(data, name) {
   csInterface.evalScript(`JSXEvent('${data}', '${name}')`)
 }

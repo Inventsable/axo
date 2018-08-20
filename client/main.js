@@ -4,44 +4,87 @@ var sysPath = csInterface.getSystemPath(SystemPath.EXTENSION);
 var logPath = sysPath + "/log/";
 var hostPath = sysPath + "/host/";
 var appName = csInterface.hostEnvironment.appName;
+var prevScan;
+
 
 loadUniversalJSXLibraries();
-
 // Full 30
-loadJSX('axo30.jsx');
+// loadJSX('axo30.jsx');
+// loadJSX('axoTags.jsx')
 
 // Partial 40
 // loadJSX('axo1040.jsx');
 
+
+loadJSX('axo30Tags.jsx')
+scanningSelection(true);
+
 const axo = {
   bg: document.getElementById('panel'),
-  colorLabel: ['R', 'G', 'B'],
+  colorLabel: ['Top', 'Left', 'Right'],
   color: ['#915059', '#988F53', '#4A6F91'],
   isSleeping: false,
+  hasTags: false,
+  tags: [],
+  tagList: [],
+  mirror: [],
   wake : function() {
-    for (var i = 0; i < axo.color.length; i++) {
-      // changeCSSVar('color' + this.colorLabel[i] + 'dark', this.color[i]);
-      changeCSSVar('color' + this.colorLabel[i] + 'outline', '#323232');
+    for (var i = 0; i < this.color.length; i++) {
+      if (!this.hasTags) {
+        changeCSSVar('color' + this.colorLabel[i] + 'CW', this.color[i]);
+        changeCSSVar('color' + this.colorLabel[i] + 'ACW', this.color[i]);
+      }
     }
-    // changeCSSVar('colorCenter', '#545454')
-    changeCSSVar('coreOpacity', '1');
-    changeCSSVar('cropOpacity', '1');
-    changeCSSVar('allScale', '1');
-    changeCSSVar('allOpacity', '1');
-    // changeCSSVar('bumperOpacity', '.5');
+    // changeCSSVar('colorCenter', '#323232');
+    // changeCSSVar('coreOpacity', '1');
     this.isSleeping = false;
   },
   sleep : function() {
-    for (var i = 0; i < axo.color.length; i++) {
-      // changeCSSVar('color' + axo.colorLabel[i] + 'dark', '#323232');
-      changeCSSVar('color' + axo.colorLabel[i] + 'outline', axo.color[i]);
+    for (var i = 0; i < this.color.length; i++) {
+      changeCSSVar('color' + this.colorLabel[i] + 'CW', '#545454');
+      changeCSSVar('color' + this.colorLabel[i] + 'ACW', '#545454');
     }
-    changeCSSVar('coreOpacity', '0');
-    changeCSSVar('cropOpacity', '0');
-    changeCSSVar('allScale', '.875');
-    changeCSSVar('allOpacity', '.5');
-    changeCSSVar('bumperOpacity', '0');
+    // changeCSSVar('colorCenter', '#323232');
     this.isSleeping = true;
+  },
+  reset : function() {
+    if (this.isSleeping) {
+      if (this.hasTags) {
+        try {
+          this.colorTags();
+        } catch(err) {
+          this.hasTags = false;
+          this.reset();
+        }
+      } else {
+        for (var i = 0; i < this.color.length; i++) {
+          changeCSSVar('color' + this.colorLabel[i] + 'CW', '#545454');
+          changeCSSVar('color' + this.colorLabel[i] + 'ACW', '#545454');
+        }
+      }
+    } else {
+      if (this.hasTags) {
+        try {
+          this.colorTags();
+        } catch(err) {
+          this.hasTags = false;
+          this.reset();
+        }
+      } else {
+        for (var i = 0; i < this.color.length; i++) {
+          changeCSSVar('color' + this.colorLabel[i] + 'CW', this.color[i]);
+          changeCSSVar('color' + this.colorLabel[i] + 'ACW', this.color[i]);
+        }
+      }
+    }
+  },
+  colorTags : function() {
+    var thisTag = this.tagList[0];
+    var dir = thisTag.match(/\w*(p|t)(?=(ACW)|(CW))/gm);
+    // console.log(dir);
+    var side = dir[0];
+    changeCSSVar('color' + dir + 'CW', getCSSVar(`color${side}`))
+    changeCSSVar('color' + dir + 'ACW', getCSSVar(`color${side}`))
   }
 }
 
@@ -56,6 +99,120 @@ axo.bg.addEventListener('mouseout', function(e){
 })
 
 
+function scanTags(...args) {
+  axo.tags = [];
+  if (args.length < 1) {
+    csInterface.evalScript(`readTags()`, function(data){
+      var res = data.split(',');
+      if (res.length > 1) {
+        for (var i = 0; i < res.length; i++) {
+          axo.tags.push(res[i].split(';'));
+        }
+      }
+      var writing = '';
+      var valid = 0;
+      var err = [];
+      axo.mirror = [];
+      axo.tags.forEach(function(v,i,a){
+        axo.mirror.push(v[1]);
+        if (i < 1) {
+          writing += 'Total tags:\r\n'
+          axo.tagList.push(v[1])
+        } else {
+          for (var u = 0; u < axo.tagList.length; u++) {
+            if (axo.tagList[u] == v[1])
+              err.push(v[1]);
+          }
+        }
+        if (v.length > 1) {
+          writing += "\tpageItem[" + v[0] + "] : " + v[1] + '\r\n';
+        }
+      });
+      if (err.length) {
+        axo.hasTags = true;
+        console.log(axo.mirror);
+        console.log(axo.tagList);
+        axo.tagList = [ ...new Set(axo.mirror) ];
+        console.log(axo.tagList);
+      }
+      // for (var e = 0; e < axo.tags.length; e++) {
+      //   console.log(axo.tags[e]);
+      //   if (axo.tags[e].length > 1) {
+      //     writing += axo.tags[e][1] + '\r\n';
+      //   }
+      // }
+      if (writing !== '') {
+        var vOutput = '';
+        for (var un = 0; un < axo.tagList.length; un++) {
+          vOutput += "\t" + axo.tagList[un] + "\r\n"
+        }
+        writing +=  "\r\nUnique tags:\r\n" + vOutput
+        toPlayWrite(axo.tags.length + ' SSR tags detected', writing)
+        for (var z = 0; z < axo.tagList.length; z++) {
+          var dir = axo.tagList[z].match(/\w*(p|t)(?=(ACW)|(CW))/gm);
+          var side = dir[0];
+          changeCSSVar('color' + side + 'CW', getCSSVar('color' + side))
+          changeCSSVar('color' + side + 'ACW', getCSSVar('color' + side))
+          // if (/^T/g.test(axo.tagList[z])) {
+          //   console.log('This is top');
+          // } else if (/^L/g.test(axo.tagList[z])) {
+          //   console.log('This is left');
+          // } else if (/^R/g.test(axo.tagList[z])) {
+          //   console.log('This is right');
+          // }
+        }
+      } else {
+        // resetColors();
+        toPlayWrite('No tags detected', '')
+      }
+    });
+  }
+}
+
+function scanningSelection(state) {
+	if (state) {
+		timer = setInterval(function(){csInterface.evalScript('readSelection()', function(newScan){
+      if (prevScan) {
+        changeCSSVar('colorCenter', '#323232')
+      } else if (axo.isSleeping) {
+        changeCSSVar('colorCenter', '#545454')
+      } else {
+        changeCSSVar('colorCenter', '#545454')
+      }
+
+      if (axo.hasTags) {
+        try {
+          axo.colorTags();
+        } catch(e){axo.reset()}
+      }
+      if (newScan == prevScan) return;
+      // if (newScan > 0)
+      // console.log(newScan);
+      if (newScan) {
+        // if (axo.hasTags) {
+          axo.tagList = [];
+          axo.reset()
+          scanTags();
+        // }
+        // toPlayWrite('Selection changed to ' + newScan)
+      } else {
+        axo.hasTags = false;
+        axo.tags = [];
+        axo.tagList = [];
+
+        axo.reset();
+        toPlayWrite('Nothing selected', '')
+      }
+      // console.log('Selection changed');
+      prevScan = newScan;
+    })}, 50);
+		console.log("Scanning selection on");
+	} else {
+		clearInterval(timer);
+		console.log("Scanning selection off");
+	}
+}
+
 window.Event = new Vue();
 var trueAngle = 30;
 
@@ -63,8 +220,8 @@ Vue.component('axo', {
   template: `
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150">
     <g v-for="region in section" :id="region.direction + 'Group'" @mouseover="highlightThis(region)" @mouseleave="normalizeAll">
-      <polygon :id="region.direction + 'CW'" :class="region.direction + 'Flag'" :points="region.cwBounds" @click="SSRcw(region.direction)"/>
-      <polygon :id="region.direction + 'ACW'" :class="region.direction + 'Flag'" :points="region.acwBounds" @click="SSRacw(region.direction)"/>
+      <polygon :id="region.direction + 'CW'" :class="region.direction + 'FlagCW'" :points="region.cwBounds" @click="SSRcw(region.direction)"/>
+      <polygon :id="region.direction + 'ACW'" :class="region.direction + 'FlagACW'" :points="region.acwBounds" @click="SSRacw(region.direction)"/>
       <line v-if="(region.direction == 'Top')" class="TopDivider" x1="95.91" y1="73.64" x2="95.91" y2="10.42"/>
       <line v-if="(region.direction == 'Left')" class="LeftDivider" x1="95.91" y1="73.64" x2="41.16" y2="105.24"/>
       <line v-if="(region.direction == 'Right')" class="RightDivider" x1="95.91" y1="73.64" x2="150.65" y2="105.24"/>
@@ -130,14 +287,24 @@ Vue.component('axo', {
       trueAngle = (trueAngle > 0) ? trueAngle * -1 : trueAngle;
       // console.log(`SSRcw('${trueAngle}', '${dir}')`);
       csInterface.evalScript(`SSR('${trueAngle}', '${dir}')`, function(e){
-
+        if (!axo.hasTags) {
+          // console.log('No tags');
+          csInterface.evalScript(`readTags('${dir}CW');`, function(reload){
+            prevScan = 0;
+          })
+        }
       })
     },
     SSRacw : function(dir) {
       trueAngle = (trueAngle < 0) ? trueAngle * -1 : trueAngle;
       // console.log(`SSRacw('${trueAngle}', '${dir}')`);
       csInterface.evalScript(`SSR('${trueAngle}', '${dir}')`, function(e){
-
+        if (!axo.hasTags) {
+          // console.log('No tags');
+          csInterface.evalScript(`readTags('${dir}ACW');`, function(reload){
+            prevScan = 0;
+          })
+        }
       })
     },
     highlightThis: function(section) {
@@ -163,7 +330,7 @@ Vue.component('axo', {
     normalizeAll: function(section) {
       this.section.forEach(function(v,i,a){
         // console.log('Normalizing');
-        changeCSSVar("colorCenter", '#323232');
+        // changeCSSVar("colorCenter", '#323232');
         changeCSSVar("colorStrCenter", '#323232');
         this.core.style.transform = 'scale(1)';
         changeCSSVar("bumperOpacity", '0');
@@ -174,7 +341,7 @@ Vue.component('axo', {
       this.section.forEach(function(v,i,a){
         var target = document.getElementById(v.direction + 'Group');
         target.style.transform = 'scale(.375)';
-        changeCSSVar("colorCenter", '#323232');
+        // changeCSSVar("colorCenter", '#323232');
         // changeCSSVar("bumperOpacity", '1');
         changeCSSVar(v.direction + 'Divider', 'none')
       });
@@ -222,29 +389,6 @@ Vue.component('toolbar', {
   }
 })
 
-// Vue.component('input-num', {
-//   props: ['amt'],
-//   template: `
-//   <div class="adobe-toolbar">
-//     <div class="adobe-inputGroup-num">
-//       <input class="adobe adobe-input adobe-input-num" @change="onChange" v-model="this.num">
-//     </div>
-//   </div>
-//   `,
-//   data() {
-//     return {
-//       num: '10px',
-//     }
-//   },
-//   methods: {
-//     onChange:function(){
-//       console.log(this.num);
-//       changeCSSVar("strLG", this.num);
-//     }
-//   }
-// })
-
-
 var app = new Vue({
   el: '#app',
   data: {
@@ -252,39 +396,5 @@ var app = new Vue({
     colorLabel: ['R', 'G', 'B'],
     color: ['#915059', '#988F53', '#4A6F91'],
     isSleeping: false,
-  //   css: [
-  //     { coreOpacity : 1 },
-  //     { cropOpacity : 1 },
-  //     { bumperOpacity : 1 },
-  //     { allOpacity : 1 },
-  //     { coreOpacity : 1 },
-  // ],
   },
-  // methods: {
-  //   wake : function() {
-  //     for (var i = 0; i < this.color.length; i++) {
-  //       // changeCSSVar('color' + this.colorLabel[i] + 'dark', this.color[i]);
-  //       changeCSSVar('color' + this.colorLabel[i] + 'outline', '#323232');
-  //     }
-  //     // changeCSSVar('colorCenter', '#545454')
-  //     changeCSSVar('coreOpacity', '1');
-  //     changeCSSVar('cropOpacity', '1');
-  //     changeCSSVar('allScale', '1');
-  //     changeCSSVar('allOpacity', '1');
-  //     // changeCSSVar('bumperOpacity', '.5');
-  //     this.isSleeping = false;
-  //   },
-  //   sleep : function() {
-  //     for (var i = 0; i < this.color.length; i++) {
-  //       // changeCSSVar('color' + axo.colorLabel[i] + 'dark', '#323232');
-  //       changeCSSVar('color' + axo.colorLabel[i] + 'outline', axo.color[i]);
-  //     }
-  //     changeCSSVar('coreOpacity', '0');
-  //     changeCSSVar('cropOpacity', '0');
-  //     changeCSSVar('allScale', '.875');
-  //     changeCSSVar('allOpacity', '.5');
-  //     changeCSSVar('bumperOpacity', '0');
-  //     this.isSleeping = true;
-  //   }
-  // },
 });

@@ -1,19 +1,43 @@
 :root {
-  --colorR: #f06e81;
-  --colorG: #ffed75;
-  --colorB: #6297f0;
-  --colorRdark: #915059;
-  --colorGdark: #988F53;
-  --colorBdark: #4A6F91;
+  /* --colorR: 255,54,82; */
+  /* --colorTopHover: rgba(var(--colorR),.5); */
+
+  --colorTopHover: #f06e81;
+  --colorLeftHover: #ffed75;
+  --colorRightHover: #6297f0;
+
+  --colorTopClick: #ff3652;
+  --colorLeftClick: #ffd70d;
+  --colorRightClick: #3b81ff;
+
+  --colorTopMuted: #ff3652;
+  --colorLeftMuted: #ffd70d;
+  --colorRightMuted: #3b81ff;
+
+  --colorTopUsed: #ff3652;
+  --colorLeftUsed: #ffd70d;
+  --colorRightUsed: #3b81ff;
+
+  --colorTop: #915059;
+  --colorLeft: #988F53;
+  --colorRight: #4A6F91;
+  --colorTopCW: #915059;
+  --colorTopACW: #915059;
+  --colorLeftCW: #988F53;
+  --colorLeftACW: #988F53;
+  --colorRightCW: #4A6F91;
+  --colorRightACW: #4A6F91;
   --colorCenter: var(--colorPanelBG);
   --colorStrCenter: var(--colorPanelBG);
 
   --strLG: 10px;
   --strMD: 5px;
 
-  --colorRoutline: var(--colorPanelBG);
-  --colorGoutline: var(--colorPanelBG);
-  --colorBoutline: var(--colorPanelBG);
+  --colorTopoutline: var(--colorPanelBG);
+  --colorLeftoutline: var(--colorPanelBG);
+  --colorRightoutline: var(--colorPanelBG);
+  --colorToggle: #323232;
+
   --TopDivider: none;
   --LeftDivider: none;
   --RightDivider: none;
@@ -30,8 +54,26 @@
   font-weight: 300;
 }
 
+
+
 body {
   height: 250px;
+}
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  /* height: 100px; */
+}
+
+.Toggle {
+  margin-left: 40%;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 2rem;
+  background-color: var(--colorToggle);
 }
 
 svg {
@@ -40,6 +82,9 @@ svg {
   opacity: var(--allOpacity);
   transition: transform 120ms var(--quart) 20ms,
                 opacity 100ms var(--quad)  50ms;
+  /* min-width: 100px; */
+  width: 150px;
+  /* max-width: 180px; */
 }
 
 #TopGroup {
@@ -75,6 +120,7 @@ svg {
 
 [class*="Flag"] {
   pointer-events: fill;
+  stroke-width: 3px;
   transition: opacity 130ms var(--quad) 20ms,
                stroke 130ms var(--quad) 20ms,
                  fill 130ms var(--quad) 20ms;
@@ -107,33 +153,73 @@ svg {
   fill: var(--colorB);
 }
 
-.TopFlag {
-  fill: var(--colorRdark);
-  stroke: var(--colorRdark);
+[class*="TopFlag"]:hover {
+  fill: var(--colorTopHover);
+  stroke: var(--colorTopHover);
 }
 
-.LeftFlag {
-  fill: var(--colorGdark);
-  stroke: var(--colorGdark);
+[class*="LeftFlag"]:hover {
+  fill: var(--colorLeftHover);
+  stroke: var(--colorLeftHover);
 }
 
-.RightFlag {
-  fill: var(--colorBdark);
-  stroke: var(--colorBdark);
+[class*="RightFlag"]:hover {
+  fill: var(--colorRightHover);
+  stroke: var(--colorRightHover);
+}
+
+[class*="TopFlag"]:active {
+  fill: var(--colorTopClick);
+  stroke: var(--colorTopClick);
+}
+
+[class*="LeftFlag"]:active {
+  fill: var(--colorLeftClick);
+  stroke: var(--colorLeftClick);
+}
+
+[class*="RightFlag"]:active {
+  fill: var(--colorRightClick);
+  stroke: var(--colorRightClick);
+}
+
+.TopFlagCW {
+  fill: var(--colorTopCW);
+  stroke: var(--colorTopCW);
+}
+.TopFlagACW {
+  fill: var(--colorTopACW);
+  stroke: var(--colorTopACW);
+}
+
+.LeftFlagCW {
+  fill: var(--colorLeftCW);
+  stroke: var(--colorLeftCW);
+}
+.LeftFlagACW {
+  fill: var(--colorLeftACW);
+  stroke: var(--colorLeftACW);
+}
+
+.RightFlagCW {
+  fill: var(--colorRightCW);
+  stroke: var(--colorRightCW);
+}
+.RightFlagACW {
+  fill: var(--colorRightACW);
+  stroke: var(--colorRightACW);
 }
 
 .TopCrop {
-  stroke: var(--colorRoutline);
+  stroke: var(--colorTopoutline);
 }
 
-
-
 .LeftCrop {
-  stroke: var(--colorGoutline);
+  stroke: var(--colorLeftoutline);
 }
 
 .RightCrop {
-  stroke: var(--colorBoutline);
+  stroke: var(--colorRightoutline);
 }
 
 .TopDivider {
@@ -157,6 +243,7 @@ svg {
   stroke: var(--colorStrCenter);
   stroke-width: var(--strMD);
   transform-origin: center;
+  cursor: pointer;
   opacity: var(--coreOpacity);
   transition: fill 100ms var(--quad)  20ms,
             stroke 100ms var(--quad)  20ms,
