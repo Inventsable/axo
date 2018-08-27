@@ -51,7 +51,10 @@
               <Width>120</Width>
             </MinSize>
           </Geometry>
-          <Icons />
+          <Icons>
+             <Icon Type="Normal">./icons/iconLight.png</Icon>
+             <Icon Type="RollOver">./icons/iconLightRollover.png</Icon>
+          </Icons>
         </UI>
       </DispatchInfo>
     </Extension>

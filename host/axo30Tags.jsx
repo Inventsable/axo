@@ -10,17 +10,17 @@ var hasPath = thisDoc.pathItems.length > 0;
 // SSR(-30, 'Left')
 // SSR(30, 'Left')
 
-var j = "0";
-    j = prompt("Mode ? 0-5",j,"");
-switch (j) {
-      case ("0"): SSR(-30, 'Top'); break;
-      case ("1"): SSR(30, 'Top'); break;
-      case ("2"): SSR(-30, 'Right'); break;
-      case ("3"): SSR(30, 'Right'); break;
-      case ("4"): SSR(-30, 'Left');break;
-      case ("5"): SSR(30, 'Left');
-
-      }
+// var j = "0";
+//     j = prompt("Mode ? 0-5",j,"");
+// switch (j) {
+//       case ("0"): SSR(-30, 'Top'); break;
+//       case ("1"): SSR(30, 'Top'); break;
+//       case ("2"): SSR(-30, 'Right'); break;
+//       case ("3"): SSR(30, 'Right'); break;
+//       case ("4"): SSR(-30, 'Left');break;
+//       case ("5"): SSR(30, 'Left');
+//
+//       }
 
 
 function readSelection() {
